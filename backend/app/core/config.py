@@ -5,9 +5,10 @@ All environment variables are loaded from .env file.
 
 from functools import lru_cache
 from typing import Literal
+from typing_extensions import Annotated
 
 from pydantic import field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, SettingsConfigDict, NoDecode
 
 
 class Settings(BaseSettings):
@@ -26,7 +27,7 @@ class Settings(BaseSettings):
 
     # ── API ────────────────────────────────────────────────────────────────
     API_V1_PREFIX: str = "/api/v1"
-    ALLOWED_ORIGINS: list[str] = [f"http://localhost:{p}" for p in range(3000, 3011)] + ["http://localhost:8000"]
+    ALLOWED_ORIGINS: Annotated[list[str], NoDecode] = [f"http://localhost:{p}" for p in range(3000, 3011)] + ["http://localhost:8000"]
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
