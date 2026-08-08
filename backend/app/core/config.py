@@ -28,6 +28,34 @@ class Settings(BaseSettings):
     API_V1_PREFIX: str = "/api/v1"
     ALLOWED_ORIGINS: list[str] = [f"http://localhost:{p}" for p in range(3000, 3011)] + ["http://localhost:8000"]
 
+    @field_validator("ALLOWED_ORIGINS", mode="before")
+    @classmethod
+    def parse_allowed_origins(cls, v):
+        """
+        Accepts either a JSON array string (e.g. '["a","b"]') or a plain
+        comma-separated string (e.g. 'a,b,c') from the environment.
+        Prevents crashes when the env var is edited by hand on a dashboard
+        and the JSON syntax gets broken (trailing commas, missing brackets,
+        missing separators, etc).
+        """
+        if isinstance(v, list):
+            return v
+        if isinstance(v, str):
+            v = v.strip()
+            if not v:
+                return []
+            if v.startswith("["):
+                try:
+                    import json
+                    parsed = json.loads(v)
+                    if isinstance(parsed, list):
+                        return [str(o).strip().rstrip("/") for o in parsed if str(o).strip()]
+                except Exception:
+                    pass
+            # Fallback: treat as comma-separated
+            return [o.strip().rstrip("/") for o in v.split(",") if o.strip()]
+        return v
+
     # ── LLM Provider ───────────────────────────────────────────────────────
     # Set to "openai", "claude", or "groq"
     LLM_PROVIDER: Literal["openai", "claude", "groq"] = "openai"
