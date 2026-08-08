@@ -1,0 +1,40 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Test artifacts
+test_request.json
+check_setup.py
+bugcheck.txt
+c.txt
+check_output.txt
+debug_output.txt
+ingest_output.txt
+test_embed.py
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+frontend/yarn.lock
+frontend/package-lock.json
