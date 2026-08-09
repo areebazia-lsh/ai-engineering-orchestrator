@@ -5,16 +5,16 @@ An agentic AI system for software engineering teams. Understands codebases, plan
 ## Architecture Overview
 
 ```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│  Context    │────▶│   Router    │────▶│   Planner   │
-│  Manager    │     │             │     │             │
-└─────────────┘     └─────────────┘     └─────────────┘
-                                              │
-                                              ▼
-                    ┌─────────────┐     ┌─────────────┐
-                    │ Knowledge   │────▶│  Response   │
-                    │   Agent     │     │ Generator   │
-                    └─────────────┘     └─────────────┘
+┌─────────────┐     ┌─────────────┐      ┌─────────────┐
+│  Context    │───> │   Router    │ ───> │   Planner   │
+│  Manager    │     │             │      │             │
+└─────────────┘     └─────────────┘      └─────────────┘
+                                                │
+                                                ▼
+                    ┌─────────────┐      ┌─────────────┐
+                    │ Knowledge   │────> │  Response   │
+                    │   Agent     │      │ Generator   │
+                    └─────────────┘      └─────────────┘
                     ┌─────────────┐
                     │ CodeIntel   │
                     │   Agent     │
@@ -23,23 +23,23 @@ An agentic AI system for software engineering teams. Understands codebases, plan
                     │  Coding     │
                     │   Agent     │
                     └─────────────┘
-                    ┌─────────────┐     ┌─────────────┐
-                    │  Testing    │────▶│ Validation  │
-                    │   Agent     │     │   Agent     │
-                    └─────────────┘     └─────────────┘
+                    ┌─────────────┐      ┌─────────────┐
+                    │  Testing    │────> │ Validation  │
+                    │   Agent     │      │   Agent     │
+                    └─────────────┘      └─────────────┘
 ```
 
 ## Phases
 
 | Phase | Feature | Status |
 |-------|---------|--------|
-| 1 | Core orchestrator (Context, Router, Planner, Response) | ✅ Done |
-| 2 | RAG (Vector storage, embeddings, KnowledgeAgent) | ✅ Done |
-| 3 | Code Intelligence (AST analysis, dependencies) | ✅ Done |
-| 4 | Code Modification (Patch generation, validation) | ✅ Done |
-| 5 | Memory (Long-term storage, context summarization) | ✅ Done |
-| 6 | Testing (Test generation, validation, retry loop) | ✅ Done |
-| Frontend | Chat, DiffViewer, PatchApproval | ✅ Done |
+| 1 | Core orchestrator (Context, Router, Planner, Response) | Done |
+| 2 | RAG (Vector storage, embeddings, KnowledgeAgent)       | Done |
+| 3 | Code Intelligence (AST analysis, dependencies)         | Done |
+| 4 | Code Modification (Patch generation, validation)       | Done |
+| 5 | Memory (Long-term storage, context summarization)      | Done |
+| 6 | Testing (Test generation, validation, retry loop)      | Done |
+| Frontend | Chat, DiffViewer, PatchApproval                 | Done |
 
 ## Setup
 
